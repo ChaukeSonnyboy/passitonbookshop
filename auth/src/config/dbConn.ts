@@ -1,0 +1,18 @@
+import mongoose from "mongoose";
+import logger from "../utils/logger";
+
+const dbConn = async () => {
+  try {
+    const connectionInstance = await mongoose.connect(
+      `mongodb://auth-mongo-service/27017/auth`
+    );
+    logger.info(
+      `Database connected successfully! DB Host: ${connectionInstance.connection.host}`
+    );
+  } catch (error) {
+    logger.error(`Error in connecting to the database! ${error}`);
+    process.exit(1);
+  }
+};
+
+export { dbConn };

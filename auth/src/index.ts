@@ -1,14 +1,14 @@
-import express from "express";
+import { app } from "./app";
+import { dbConn } from "./config/dbConn";
+import { DatabaseConnectionError } from "./errors/db-connection-error";
+import logger from "./utils/logger";
 
-import userRoute from "./routes/userRoute";
-import bookRoute from "./routes/bookRoute"
-
-const app = express();
-app.use(express.json());
-
-app.use("/api/users", userRoute); 
-app.use("/api/books/", bookRoute);
-
-app.listen(3000, () => {
-  console.log(`server is running on port 3000!`);
- });
+dbConn()
+  .then(() => {
+    app.listen(3000, () => {
+      logger.info(`Server is running on port 3000!!`);
+    });
+  })
+  .catch((error) => {
+    throw new DatabaseConnectionError(error.message);
+  });
