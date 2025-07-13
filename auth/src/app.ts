@@ -4,6 +4,7 @@ import logger from "./utils/logger";
 
 import healthCheckRouter from "./routes/healthcheck-route";
 import { userRouter } from "./routes/user-route";
+import { errorHandler } from "./middlewares/error-middleware";
 
 const morganFormat = ":method :url :status";
 
@@ -29,5 +30,7 @@ app.use(
 
 app.use("/api/v1/auth/users", healthCheckRouter);
 app.use("/api/v1/auth/users", userRouter);
+
+app.use(errorHandler);
 
 export { app };

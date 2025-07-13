@@ -1,6 +1,6 @@
-import { CustomError } from "../utils/CustomError";
+import { ApiError } from "../utils/ApiError";
 
-class DatabaseConnectionError extends CustomError {
+class DatabaseConnectionError extends ApiError {
   statusCode = 500;
 
   constructor(message = `Error connecting to the Database!!`) {
@@ -9,15 +9,8 @@ class DatabaseConnectionError extends CustomError {
     Object.setPrototypeOf(this, DatabaseConnectionError.prototype);
   }
 
-  standarizedError() {
-    return [
-      {
-        statusCode: this.statusCode,
-        success: false,
-        message: this.message,
-        data: null,
-      },
-    ];
+  serializeError() {
+    return [{ message: this.message }];
   }
 }
 

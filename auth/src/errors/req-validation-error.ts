@@ -1,7 +1,7 @@
-import { CustomError } from "../utils/CustomError";
+import { ApiError } from "../utils/ApiError";
 import { ValidationError } from "express-validator";
 
-class RequestValidationError extends CustomError {
+class RequestValidationError extends ApiError {
   statusCode = 400;
 
   constructor(
@@ -13,18 +13,13 @@ class RequestValidationError extends CustomError {
     Object.setPrototypeOf(this, RequestValidationError.prototype);
   }
 
-  standarizedError() {
+  serializeError() {
     return this.errors.map((err) => {
-      const baseError = {
-        statusCode: this.statusCode,
-        success: false,
-        message: err.msg,
-        data: null as null,
-      };
-      if (err.type === "field") {
-        return { ...baseError, field: err.path };
+      if (err.type === `field`) {
+        return { message: err.msg, field: err.path };
       }
-      return baseError;
+
+      return { message: err.msg };
     });
   }
 }

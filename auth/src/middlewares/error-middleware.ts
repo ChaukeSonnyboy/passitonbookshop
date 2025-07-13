@@ -1,21 +1,18 @@
-import { NextFunction, Request, Response } from "express";
-import { CustomError } from "../utils/CustomError";
+import { ApiError } from "../utils/ApiError";
+import { ErrorRequestHandler } from "express";
 
-const errorHandler = (
-  err: Error,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  //Handling all the errors from the custom errors
-  if (err instanceof CustomError) {
-    return res.status(err.statusCode).send({ errors: err.standarizedError() });
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  //Handling all the errors from the custom ApiError
+  if (err instanceof ApiError) {
+    res.status(err.statusCode).send(err.standarizedError());
+    return;
   }
 
-  res.status(400).send({
+  res.status(500).json({
+    statusCode: 500,
     success: false,
+    errors: [{ message: err.message || "Unexpected Error Occured!" }],
     data: null,
-    errors: [{ message: `Something Went Wrong!` }],
   });
 };
 
