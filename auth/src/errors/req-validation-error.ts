@@ -1,8 +1,9 @@
+import { BAD_REQUEST } from "../constants/http-status-codes";
 import { ApiError } from "../utils/ApiError";
 import { ValidationError } from "express-validator";
 
 class RequestValidationError extends ApiError {
-  statusCode = 400;
+  statusCode = BAD_REQUEST;
 
   constructor(
     public errors: ValidationError[],

@@ -1,7 +1,8 @@
+import { CONFLICT } from "../constants/http-status-codes";
 import { ApiError } from "../utils/ApiError";
 
 class ConflictError extends ApiError {
-  statusCode = 409;
+  statusCode = CONFLICT;
 
   constructor(message: string) {
     super(message);

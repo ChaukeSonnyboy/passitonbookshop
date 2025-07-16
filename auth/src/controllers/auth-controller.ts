@@ -4,6 +4,8 @@ import { RequestHandler } from "express";
 import logger from "../utils/logger";
 import { ConflictError } from "../errors/conflict-error";
 import { ApiResponse } from "../utils/ApiResponse";
+import { CREATED } from "../constants/http-status-codes";
+import { DatabaseConnectionError } from "../errors/db-connection-error";
 
 //Controller/Handler to get a loggedin user info
 const getLoggedInUser: RequestHandler = asyncHandler(async (req, res) => {
@@ -17,18 +19,25 @@ const registerUser: RequestHandler = asyncHandler(async (req, res) => {
   const registredUser = await User.findOne({ email });
 
   if (registredUser) {
-    logger.error(`User with eamil:  ${email} already exists!`);
+    logger.error(`User with email:  ${email} already exists!`);
     throw new ConflictError(`User with email: ${email} already exists!`);
   }
 
   const user = User.build({ firstname, lastname, email, password });
   await user.save();
 
-  res
-    .status(201)
-    .send(new ApiResponse(201, `User Created Successfully!`, user));
+  const createdUser = await User.findById(user._id);
 
-  // res.send(`Welcome to the registration/signup route!`);
+  if (!createdUser) {
+    logger.error(`Soething went wrong while creating a new user!`);
+    throw new DatabaseConnectionError(`User creation failed!`);
+  }
+
+  logger.info(`User creation was a success!`);
+
+  res
+    .status(CREATED)
+    .send(new ApiResponse(CREATED, `User created successfully!`, user));
 });
 
 //Controller/Handler to signin a user

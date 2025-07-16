@@ -1,7 +1,8 @@
+import { INTERNAL_SERVER_ERROR } from "../constants/http-status-codes";
 import { ApiError } from "../utils/ApiError";
 
 class DatabaseConnectionError extends ApiError {
-  statusCode = 500;
+  statusCode = INTERNAL_SERVER_ERROR;
 
   constructor(message = `Error connecting to the Database!!`) {
     super(message);

@@ -1,3 +1,5 @@
+import { BAD_REQUEST } from "../constants/http-status-codes";
+
 class ApiResponse {
   statusCode: number;
   success: boolean;
@@ -6,7 +8,7 @@ class ApiResponse {
 
   constructor(statusCode: number, message = "Request Passed!", data: any) {
     this.statusCode = statusCode;
-    this.success = statusCode < 400;
+    this.success = statusCode < BAD_REQUEST;
     this.message = message;
     this.data = data;
   }
