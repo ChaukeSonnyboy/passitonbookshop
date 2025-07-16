@@ -6,7 +6,7 @@ import logger from "./utils/logger";
 dbConn()
   .then(() => {
     app.listen(3000, () => {
-      logger.info(`Server is running on port 3000!!`);
+      logger.info(`Server is running on port 3000!`);
     });
   })
   .catch((error) => {
