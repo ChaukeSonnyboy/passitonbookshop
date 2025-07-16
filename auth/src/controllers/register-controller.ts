@@ -24,7 +24,7 @@ const registerUser: RequestHandler = asyncHandler(async (req, res) => {
   const createdUser = await User.findById(user._id);
 
   if (!createdUser) {
-    logger.error(`Soething went wrong while creating a new user!`);
+    logger.error(`Something went wrong while creating a new user!`);
     throw new DatabaseConnectionError(`User creation failed!`);
   }
 

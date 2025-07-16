@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import argon from "argon2";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import logger from "../utils/logger";
 
 dotenv.config();
 
@@ -12,6 +13,9 @@ interface userDoc extends mongoose.Document {
   email: string;
   password: string;
   refreshToken: string;
+  verifyPassword(password: string): Promise<boolean>;
+  generateAccessToken(): string;
+  generateRefreshToken(): string;
 }
 
 // Interface representing the properties required to create a new user (input data)
@@ -25,6 +29,8 @@ interface userProps {
 // Interface representing the custom methods on the User model
 interface userModel extends mongoose.Model<userDoc> {
   verifyPassword(password: string): Promise<boolean>;
+  generateAccessToken(): string;
+  generateRefreshToken(): string;
   build(props: userProps): userDoc;
 }
 
@@ -79,6 +85,7 @@ userSchema.pre("save", async function (next) {
     const hashedPassword = await argon.hash(this.password);
 
     this.password = hashedPassword;
+
     next();
   } catch (err) {
     next(err as Error);
@@ -90,7 +97,7 @@ userSchema.methods.verifyPassword = async function (
   password: string
 ): Promise<boolean> {
   try {
-    return await argon.verify(password, this.password);
+    return await argon.verify(this.password, password);
   } catch {
     return false;
   }
@@ -103,6 +110,7 @@ userSchema.statics.build = (props: userProps) => {
 
 //Method to generate an access token
 userSchema.methods.generateAccessToken = function () {
+  logger.info("you are about to generate the access token");
   return jwt.sign(
     {
       id: this.id,
@@ -118,6 +126,7 @@ userSchema.methods.generateAccessToken = function () {
 
 //Method to generate a refresh token
 userSchema.methods.generateRefreshToken = function () {
+  logger.info(`you are aboutt to genrate the refresh token`);
   return jwt.sign(
     {
       id: this.id,
