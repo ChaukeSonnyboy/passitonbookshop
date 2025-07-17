@@ -5,10 +5,12 @@ import logger from "./utils/logger";
 import healthCheckRouter from "./routes/healthcheck-route";
 import { userRouter } from "./routes/user-route";
 import { errorHandler } from "./middlewares/error-middleware";
+import cookieparser from "cookie-parser";
 
 const morganFormat = ":method :url :status";
 
 const app = express();
+app.use(cookieparser());
 
 app.use(express.json());
 

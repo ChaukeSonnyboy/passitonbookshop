@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 import logger from "../utils/logger";
 
 const dbConn = async () => {
+  process.env.ACCESS_TOKEN_SECRET = "rfgeuirgvoiwnekjfbf"; //for testing purposes
+  process.env.REFRESH_TOKEN_SECRET = "ffewiwlhewuibglwkbgiwl"; //for testing purposes
+
   try {
     const connectionInstance = await mongoose.connect(
       `mongodb://auth-mongo-service:27017/auth`

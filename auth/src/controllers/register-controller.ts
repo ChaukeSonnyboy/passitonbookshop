@@ -3,7 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler";
 import { ConflictError } from "../errors/conflict-error";
 import { RequestHandler } from "express";
 import logger from "../utils/logger";
-import { DatabaseConnectionError } from "../errors/db-connection-error";
+import { InternalServerError } from "../errors/internal-server-error";
 import { CREATED } from "../constants/http-status-codes";
 import { ApiResponse } from "../utils/ApiResponse";
 
@@ -25,7 +25,7 @@ const registerUser: RequestHandler = asyncHandler(async (req, res) => {
 
   if (!createdUser) {
     logger.error(`Something went wrong while creating a new user!`);
-    throw new DatabaseConnectionError(`User creation failed!`);
+    throw new InternalServerError(`User creation failed!`);
   }
 
   logger.info(`User creation was a success!`);

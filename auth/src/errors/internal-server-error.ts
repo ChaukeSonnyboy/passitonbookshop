@@ -1,13 +1,13 @@
 import { INTERNAL_SERVER_ERROR } from "../constants/http-status-codes";
 import { ApiError } from "../utils/ApiError";
 
-class DatabaseConnectionError extends ApiError {
+class InternalServerError extends ApiError {
   statusCode = INTERNAL_SERVER_ERROR;
 
   constructor(message = `Error connecting to the Database!!`) {
     super(message);
 
-    Object.setPrototypeOf(this, DatabaseConnectionError.prototype);
+    Object.setPrototypeOf(this, InternalServerError.prototype);
   }
 
   serializeError() {
@@ -15,4 +15,4 @@ class DatabaseConnectionError extends ApiError {
   }
 }
 
-export { DatabaseConnectionError };
+export { InternalServerError };

@@ -1,6 +1,6 @@
 import { app } from "./app";
 import { dbConn } from "./config/dbConn";
-import { DatabaseConnectionError } from "./errors/db-connection-error";
+import { InternalServerError } from "./errors/internal-server-error";
 import logger from "./utils/logger";
 
 dbConn()
@@ -10,5 +10,5 @@ dbConn()
     });
   })
   .catch((error) => {
-    throw new DatabaseConnectionError(error.message);
+    throw new InternalServerError(error.message);
   });

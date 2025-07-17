@@ -17,7 +17,7 @@ const loginUser: RequestHandler = asyncHandler(async (req, res) => {
 
   if (!registeredUser) {
     logger.error("User with provided Email not found!");
-    throw new NotFoundError("Invalid creditials provided!");
+    throw new BadRequestError("Invalid credentials  provided!");
   }
 
   //Validate the provided password
@@ -25,16 +25,16 @@ const loginUser: RequestHandler = asyncHandler(async (req, res) => {
 
   if (!isPasswordValid) {
     logger.error("Password Incorrect!");
-    throw new BadRequestError("Invalid creditials provided!");
+    throw new BadRequestError("Invalid credentials provided!");
   }
 
   const { accessToken, refreshToken } = await generateTokens(registeredUser.id);
 
   const options = {
-    httponly: true,
-    samesite: true,
-    secure: false, //process.env.NODE_ENV === "production"
-  };
+    httpOnly: true,
+    sameSite: "strict",
+    secure: false, //process.env.NODE_ENV === "production",
+  } as const;
 
   res
     .status(OK)

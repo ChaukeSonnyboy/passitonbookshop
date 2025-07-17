@@ -1,5 +1,5 @@
 import express from "express";
-import { getLoggedInUser } from "../controllers/auth-controller";
+import { getLoggedInUser } from "../controllers/current-user-controller";
 import { registerUser } from "../controllers/register-controller";
 import { loginUser } from "../controllers/login-controller";
 import { logoutUser } from "../controllers/logout-controller";
