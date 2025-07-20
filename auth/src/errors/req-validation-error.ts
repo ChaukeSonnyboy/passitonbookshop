@@ -1,12 +1,12 @@
 import { BAD_REQUEST } from "../constants/http-status-codes";
 import { ApiError } from "../utils/ApiError";
-import { ValidationError } from "express-validator";
+import { ZodError } from "zod";
 
 class RequestValidationError extends ApiError {
   statusCode = BAD_REQUEST;
 
   constructor(
-    public errors: ValidationError[],
+    public errors: ZodError,
     message = `Invalid Request Validations`
   ) {
     super(message);
@@ -15,12 +15,11 @@ class RequestValidationError extends ApiError {
   }
 
   serializeError() {
-    return this.errors.map((err) => {
-      if (err.type === `field`) {
-        return { message: err.msg, field: err.path };
-      }
-
-      return { message: err.msg };
+    return this.errors.issues.map((issue) => {
+      return {
+        message: issue.message,
+        field: issue.path.join("."),
+      };
     });
   }
 }
