@@ -110,7 +110,6 @@ userSchema.statics.build = (props: userProps) => {
 
 //Method to generate an access token
 userSchema.methods.generateAccessToken = function () {
-  logger.info("you are about to generate the access token");
   return jwt.sign(
     {
       id: this.id,
@@ -126,7 +125,6 @@ userSchema.methods.generateAccessToken = function () {
 
 //Method to generate a refresh token
 userSchema.methods.generateRefreshToken = function () {
-  logger.info(`you are aboutt to genrate the refresh token`);
   return jwt.sign(
     {
       id: this.id,

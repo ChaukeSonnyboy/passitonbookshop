@@ -28,12 +28,13 @@ const loginUser: RequestHandler = asyncHandler(async (req, res) => {
     throw new BadRequestError("Invalid credentials provided!");
   }
 
+  //Generate tokens
   const { accessToken, refreshToken } = await generateTokens(registeredUser.id);
 
   const options = {
     httpOnly: true,
     sameSite: "strict",
-    secure: false, //process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production",
   } as const;
 
   res

@@ -34,7 +34,7 @@ const logoutUser: RequestHandler = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     sameSite: "strict",
-    secure: false, //process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production",
   } as const;
 
   res

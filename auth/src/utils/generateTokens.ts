@@ -7,17 +7,11 @@ const generateTokens = async (userId: string) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      logger.info("You went through to this error");
       throw new BadRequestError("Invalid Creditials Provided!");
     }
-    logger.info("You got the user with the id!");
 
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
-
-    logger.info(
-      `tokens generates accessToken${accessToken}, refreshToken ${refreshToken}`
-    );
 
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
