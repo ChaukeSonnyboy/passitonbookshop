@@ -1,7 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler";
 import { RequestHandler } from "express";
 import { User } from "../models/user-model";
-import { NotFoundError } from "../errors/not-found-error";
 import { BadRequestError } from "../errors/bad-request-error";
 import { generateTokens } from "../utils/generateTokens";
 import { OK } from "../constants/http-status-codes";

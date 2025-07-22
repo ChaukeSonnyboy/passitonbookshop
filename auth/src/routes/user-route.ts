@@ -5,11 +5,12 @@ import { loginUser } from "../controllers/login-controller";
 import { logoutUser } from "../controllers/logout-controller";
 import { registerValidator } from "../middlewares/validations/register-validator";
 import { loginValidator } from "../middlewares/validations/login-validator";
+import { protect } from "../middlewares/auth-middleware";
 
 const router = express.Router();
 
 //Endpoint to get a logged-in user info
-router.route("/user").get(getLoggedInUser);
+router.route("/user").get(protect, getLoggedInUser);
 
 //Endpoint to create/register a new user
 router.route("/register").post(registerValidator, registerUser);
@@ -18,6 +19,6 @@ router.route("/register").post(registerValidator, registerUser);
 router.route("/login").post(loginValidator, loginUser);
 
 //Endpoint to signout a user
-router.route("/logout").post(logoutUser);
+router.route("/logout").post(protect, logoutUser);
 
 export { router as userRouter };
