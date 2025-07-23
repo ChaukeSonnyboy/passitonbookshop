@@ -2,6 +2,7 @@
 export * from "./constants/http-status-codes";
 
 //Export utility functions and classes
+export * from "./utils/ApiError";
 export * from "./utils/ApiResponse";
 export * from "./utils/asyncHandler";
 export * from "./utils/logger";
