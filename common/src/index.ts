@@ -1,4 +1,4 @@
-//Export Constants
+//Export constants
 export * from "./constants/http-status-codes";
 
 //Export utility functions and classes
@@ -14,3 +14,8 @@ export * from "./errors/internal-server-error";
 export * from "./errors/not-authorised-error";
 export * from "./errors/not-found-error";
 export * from "./errors/req-validation-error";
+
+//Export middlewares
+
+export * from "./middlewares/auth-middleware";
+export * from "./middlewares/error-middleware";
