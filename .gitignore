@@ -1,11 +1,15 @@
 /.vscode
 /node_modules
-./dist
+/dist
 
 *.env
 .env
 .env.*
 
+**/node_modules
+**/dist
+
 node_modules/
 .env
 auth/auth-secrets.yaml
+/common/dist
