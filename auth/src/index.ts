@@ -1,7 +1,6 @@
 import { app } from "./app";
 import { dbConn } from "./config/dbConn";
-import { InternalServerError } from "./errors/internal-server-error";
-import logger from "./utils/logger";
+import { InternalServerError, logger } from "@scbooks/common";
 
 const port = 3000;
 

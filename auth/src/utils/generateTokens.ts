@@ -1,6 +1,5 @@
-import { BadRequestError } from "../errors/bad-request-error";
+import { BadRequestError } from "@scbooks/common";
 import { User } from "../models/user-model";
-import logger from "./logger";
 
 const generateTokens = async (userId: string) => {
   try {

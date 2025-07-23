@@ -1,7 +1,5 @@
-import { asyncHandler } from "../utils/asyncHandler";
+import { asyncHandler, ApiResponse, OK } from "@scbooks/common";
 import { RequestHandler } from "express";
-import { OK } from "../constants/http-status-codes";
-import { ApiResponse } from "../utils/ApiResponse";
 
 //Controller/Handler to get a loggedin user info
 const getLoggedInUser: RequestHandler = asyncHandler(async (req, res) => {

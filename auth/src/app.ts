@@ -1,10 +1,9 @@
 import express from "express";
 import morgan from "morgan";
-import logger from "./utils/logger";
 
 import healthCheckRouter from "./routes/healthcheck-route";
 import { userRouter } from "./routes/user-route";
-import { errorHandler } from "./middlewares/error-middleware";
+import { asyncHandler, errorHandler, logger } from "@scbooks/common";
 import cookieparser from "cookie-parser";
 
 const morganFormat = ":method :url :status";

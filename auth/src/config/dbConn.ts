@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import logger from "../utils/logger";
+import { logger } from "@scbooks/common";
 
 const dbConn = async () => {
   try {
@@ -7,7 +7,8 @@ const dbConn = async () => {
       `${process.env.MONGO_URI!}`
     );
     logger.info(
-      `Database connected successfully! DB Host: ${connectionInstance.connection.host}`
+      `Database connected successfully! DB Host:
+       ${connectionInstance.connection.host}`
     );
   } catch (error) {
     logger.error(`Error in connecting to the database! ${error}`);

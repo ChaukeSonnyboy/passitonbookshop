@@ -1,11 +1,13 @@
 import { User } from "../models/user-model";
-import { asyncHandler } from "../utils/asyncHandler";
-import { ConflictError } from "../errors/conflict-error";
+import {
+  asyncHandler,
+  ConflictError,
+  logger,
+  InternalServerError,
+  CREATED,
+  ApiResponse,
+} from "@scbooks/common";
 import { RequestHandler } from "express";
-import logger from "../utils/logger";
-import { InternalServerError } from "../errors/internal-server-error";
-import { CREATED } from "../constants/http-status-codes";
-import { ApiResponse } from "../utils/ApiResponse";
 
 //Controller/Handler to create/register a new user
 const registerUser: RequestHandler = asyncHandler(async (req, res) => {

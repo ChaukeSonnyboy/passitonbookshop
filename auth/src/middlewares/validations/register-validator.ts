@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { RequestValidationError } from "../../errors/req-validation-error";
+import { asyncHandler, RequestValidationError } from "@scbooks/common";
 import { registerSchema } from "../../schemas/user-schema";
-import { asyncHandler } from "../../utils/asyncHandler";
 
 const registerValidator = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

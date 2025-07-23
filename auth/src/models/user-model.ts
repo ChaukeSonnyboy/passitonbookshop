@@ -2,11 +2,10 @@ import mongoose from "mongoose";
 import argon from "argon2";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import logger from "../utils/logger";
 
 dotenv.config();
 
-// Interface representing the shape of a User document stored in MongoDB
+// Interface representing the shape of the User document stored in DB
 interface userDoc extends mongoose.Document {
   firstname: string;
   lastname: string;

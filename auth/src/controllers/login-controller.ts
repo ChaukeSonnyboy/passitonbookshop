@@ -1,11 +1,13 @@
-import { asyncHandler } from "../utils/asyncHandler";
+import {
+  asyncHandler,
+  BadRequestError,
+  OK,
+  ApiResponse,
+  logger,
+} from "@scbooks/common";
 import { RequestHandler } from "express";
 import { User } from "../models/user-model";
-import { BadRequestError } from "../errors/bad-request-error";
 import { generateTokens } from "../utils/generateTokens";
-import { OK } from "../constants/http-status-codes";
-import { ApiResponse } from "../utils/ApiResponse";
-import logger from "../utils/logger";
 
 //Controller/Handler to signin a user
 const loginUser: RequestHandler = asyncHandler(async (req, res) => {

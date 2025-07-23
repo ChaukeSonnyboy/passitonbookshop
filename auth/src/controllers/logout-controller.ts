@@ -1,9 +1,11 @@
 import { RequestHandler } from "express";
-import { asyncHandler } from "../utils/asyncHandler";
-import { BadRequestError } from "../errors/bad-request-error";
 import { User } from "../models/user-model";
-import { OK } from "../constants/http-status-codes";
-import { ApiResponse } from "../utils/ApiResponse";
+import {
+  asyncHandler,
+  BadRequestError,
+  OK,
+  ApiResponse,
+} from "@scbooks/common";
 
 //Controller/Handler to logout a user
 const logoutUser: RequestHandler = asyncHandler(async (req, res) => {

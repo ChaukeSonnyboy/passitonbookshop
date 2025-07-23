@@ -5,7 +5,7 @@ import { loginUser } from "../controllers/login-controller";
 import { logoutUser } from "../controllers/logout-controller";
 import { registerValidator } from "../middlewares/validations/register-validator";
 import { loginValidator } from "../middlewares/validations/login-validator";
-import { protect } from "../middlewares/auth-middleware";
+import { protect } from "@scbooks/common";
 
 const router = express.Router();
 
