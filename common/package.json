@@ -1,7 +1,11 @@
 {
-  "name": "@scbookscommon",
+  "name": "@scbooks/common",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "del-cli ./dist/*",
