@@ -1,6 +1,6 @@
 {
   "name": "@scbooks/common",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -18,5 +18,11 @@
   "devDependencies": {
     "del-cli": "^6.0.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "express": "^5.1.0",
+    "winston": "^3.17.0",
+    "zod": "^4.0.5"
   }
 }
